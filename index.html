@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141a3c">
+<title>별빛 도쿄 여행 수첩</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+:root {
+  --night: #141a3c;
+  --night-2: #1e2656;
+  --night-3: #2a3370;
+  --ink: #f7f4ff;
+  --ink-soft: #cfcbee;
+  --gold: #f4c95d;
+  --gold-deep: #d9a632;
+  --pink: #f7b8d2;
+  --sky: #a9d9f6;
+  --lav: #cbb9f2;
+  --paper: #fbf3f8;
+  --paper-ink: #1d2148;
+  --r: 22px;
+  --gutter: 16px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --display: "Jua", "Gowun Dodum", system-ui, sans-serif;
+  --text: "Gowun Dodum", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--night);
+  color: var(--ink);
+  font: 17px/1.6 var(--text);
+  overflow-x: hidden;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom));
+}
+a { color: inherit; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.15; letter-spacing: -0.01em; }
+h2 { font-size: clamp(2rem, 8vw, 3.4rem); }
+h3 { font-size: 1.35rem; }
+img, svg { display: block; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+
+.wrap { width: min(100% - 2 * var(--gutter), 1080px); margin-inline: auto; }
+section { padding-block: 88px 24px; scroll-margin-top: 8px; }
+.lead { font-size: 1.1rem; color: var(--ink-soft); margin-top: 12px; max-width: 34em; }
+.src { font-size: 13px; color: var(--ink-soft); opacity: .85; white-space: nowrap; text-decoration: underline; text-underline-offset: 2px; }
+.check { display: inline-block; font-size: 13px; color: var(--paper-ink); background: var(--pink); padding: 1px 9px; border-radius: 99px; white-space: nowrap; }
+
+/* ---------- 별 바탕 ---------- */
+.sky { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.sky i {
+  position: absolute; width: 3px; height: 3px; border-radius: 50%;
+  background: var(--gold); opacity: .5;
+  animation: twinkle 3.6s ease-in-out infinite;
+}
+@keyframes twinkle { 50% { opacity: 1; transform: scale(1.6); } }
+
+/* ---------- 첫 화면: 성문 ---------- */
+.hero {
+  position: relative; min-height: 100svh; display: grid; place-items: center;
+  text-align: center; padding: 40px var(--gutter) 64px; overflow: hidden;
+}
+.hero-inner { position: relative; z-index: 1; display: grid; justify-items: center; gap: 14px; }
+.castle { width: min(72vw, 340px); color: var(--night-3); }
+.castle .win { fill: var(--gold); animation: glowwin 4s ease-in-out infinite; }
+@keyframes glowwin { 50% { opacity: .55; } }
+.hero h1 { font-size: clamp(2.6rem, 12vw, 5.6rem); color: var(--ink); }
+.hero h1 span { display: block; }
+.hero .sub { font-size: 1.1rem; color: var(--ink-soft); max-width: 22em; }
+.dday {
+  margin-top: 8px; background: var(--gold); color: var(--paper-ink);
+  border-radius: 999px; padding: 12px 26px; font-family: var(--display); font-size: 1.6rem;
+}
+.dday small { display: block; font-family: var(--text); font-size: .85rem; margin-top: -2px; }
+.hero .go {
+  margin-top: 6px; color: var(--ink); font-size: 1rem; text-decoration: none;
+  padding: 10px 18px; border-radius: 999px; background: var(--night-2);
+}
+.burst { position: absolute; width: 120px; height: 120px; color: var(--pink); opacity: 0; animation: burst 5s ease-out infinite; }
+.burst.b2 { color: var(--sky); animation-delay: 1.7s; }
+.burst.b3 { color: var(--gold); animation-delay: 3.3s; }
+@keyframes burst { 0% { opacity: 0; transform: scale(.2); } 12% { opacity: 1; } 40% { opacity: 0; transform: scale(1.1); } 100% { opacity: 0; } }
+
+.gate { position: absolute; inset: 0; z-index: 2; display: flex; perspective: 1200px; pointer-events: none; }
+.door {
+  flex: 1; background: var(--night-2); position: relative;
+  transition: transform 1.6s var(--ease) .35s;
+}
+.door.l { transform-origin: left center; border-right: 3px solid var(--gold-deep); }
+.door.r { transform-origin: right center; border-left: 3px solid var(--gold-deep); }
+.door::before {
+  content: ""; position: absolute; inset: 22% 16%; border-radius: 999px 999px 18px 18px;
+  background: var(--night-3);
+}
+.door::after {
+  content: ""; position: absolute; top: 52%; width: 14px; height: 14px; border-radius: 50%; background: var(--gold);
+}
+.door.l::after { right: 18px; }
+.door.r::after { left: 18px; }
+.open .door.l { transform: rotateY(-100deg); }
+.open .door.r { transform: rotateY(100deg); }
+.opened .gate { display: none; }
+
+/* ---------- 아래 바 ---------- */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  background: var(--night-2); display: flex; justify-content: space-around;
+  padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
+}
+.tabbar a {
+  flex: 1; text-align: center; text-decoration: none; font-size: .82rem; color: var(--ink-soft);
+  padding: 8px 2px; border-radius: 14px; transition: background .2s, color .2s;
+}
+.tabbar a:hover, .tabbar a.on { color: var(--night); background: var(--gold); }
+
+/* ---------- 일정표: 티켓 ---------- */
+.days { display: grid; gap: 18px; margin-top: 28px; }
+.ticket {
+  position: relative; background: var(--night-2); border-radius: var(--r);
+  display: grid; grid-template-columns: 78px 1fr;
+}
+.ticket::before, .ticket::after {
+  content: ""; position: absolute; left: 78px; width: 22px; height: 22px; margin-left: -11px;
+  border-radius: 50%; background: var(--night);
+}
+.ticket::before { top: -11px; }
+.ticket::after { bottom: -11px; }
+.stub {
+  display: grid; place-content: center; text-align: center; padding: 18px 6px;
+  background: var(--night-3); border-radius: var(--r) 0 0 var(--r); font-family: var(--display);
+}
+.stub b { display: block; font-size: 2.2rem; font-weight: 400; line-height: 1; color: var(--sky); }
+.stub span { font-size: .85rem; color: var(--ink-soft); }
+.tbody { padding: 18px 18px 20px; }
+.tbody .when { font-size: .85rem; color: var(--ink-soft); }
+.tbody ul { padding-left: 1.1em; margin-top: 8px; }
+.tbody li { margin-top: 4px; }
+.tbody li::marker { color: var(--lav); }
+.tag { display: inline-block; font-size: .85rem; padding: 2px 10px; border-radius: 99px; background: var(--night-3); color: var(--ink); margin-top: 10px; }
+
+.ticket.magic { background: var(--paper); color: var(--paper-ink); }
+.ticket.magic .stub { background: var(--gold); }
+.ticket.magic .src { color: #4a4f80; }
+.ticket.magic .stub b, .ticket.magic .stub span { color: var(--paper-ink); }
+.ticket.magic .when { color: #555a85; }
+.ticket.magic li::marker { color: var(--gold-deep); }
+.ticket.magic .tag { background: var(--pink); color: var(--paper-ink); }
+.ticket.magic h3 { font-size: 1.6rem; }
+.ticket.magic .spark { position: absolute; right: 14px; top: 12px; width: 46px; color: var(--gold-deep); animation: spin 9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- 숙소 ---------- */
+.stay { margin-top: 28px; background: var(--lav); color: var(--paper-ink); border-radius: var(--r); padding: 22px 20px; display: grid; gap: 16px; }
+.stay h3 { font-size: 1.6rem; }
+.stay p { font-size: 1rem; }
+.stay .src, .stay a.src { color: #3b3f6e; }
+.btns { display: grid; gap: 10px; }
+.btn {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  text-decoration: none; font-family: var(--display); font-size: 1.2rem;
+  background: var(--paper-ink); color: var(--ink); padding: 14px 20px; border-radius: 999px;
+  transition: transform .15s var(--ease), background .2s;
+}
+.btn small { font-family: var(--text); font-size: .85rem; color: var(--ink-soft); }
+.btn:hover { background: #2c3168; }
+.btn:active { transform: scale(.97); }
+.btn.gold { background: var(--gold); color: var(--paper-ink); }
+.btn.gold small { color: #4b4220; }
+.btn.gold:hover { background: #f8d67e; }
+.shuttles { list-style: none; padding: 0; display: grid; gap: 10px; font-size: .98rem; }
+.shuttles li { background: #ddd0f7; border-radius: 16px; padding: 12px 14px; }
+.shuttles b { font-family: var(--display); font-weight: 400; font-size: 1.1rem; }
+
+/* ---------- 디즈니 가이드 ---------- */
+.parks { display: grid; gap: 16px; margin-top: 28px; }
+.park { border-radius: var(--r); padding: 22px 20px; color: var(--paper-ink); }
+.park.land { background: var(--pink); }
+.park.sea { background: var(--sky); }
+.park h3 { font-size: 1.7rem; }
+.park dl { margin-top: 10px; display: grid; gap: 8px; }
+.park dt { font-family: var(--display); font-size: 1rem; }
+.park dd { margin: 0; font-size: 1rem; }
+
+.guide { margin-top: 36px; display: grid; gap: 14px; }
+.panel { background: var(--night-2); border-radius: var(--r); padding: 22px 20px; }
+.panel h3 { color: var(--gold); margin-bottom: 10px; }
+.panel p, .panel li { font-size: 1rem; }
+.panel ul, .panel ol { padding-left: 1.2em; display: grid; gap: 6px; }
+.panel li::marker { color: var(--gold); }
+.price { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: .98rem; }
+.price th, .price td { text-align: left; padding: 9px 4px; border-bottom: 1px solid var(--night-3); }
+.price td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.route .t { color: var(--sky); font-family: var(--display); margin-right: 4px; }
+
+/* ---------- 가볼 곳 ---------- */
+.places { display: grid; gap: 16px; margin-top: 28px; }
+.place { background: var(--night-2); border-radius: var(--r); overflow: hidden; }
+.photo {
+  aspect-ratio: 16 / 8; display: grid; place-items: center;
+  font-size: .95rem; color: var(--paper-ink);
+}
+.photo span { background: rgba(255,255,255,.6); padding: 4px 12px; border-radius: 99px; }
+.place:nth-child(4n+1) .photo { background: var(--pink); }
+.place:nth-child(4n+2) .photo { background: var(--sky); }
+.place:nth-child(4n+3) .photo { background: var(--lav); }
+.place:nth-child(4n+4) .photo { background: #f6dc98; }
+.place .info { padding: 16px 18px 20px; }
+.place .loc { font-size: .88rem; color: var(--sky); }
+.place p { font-size: 1rem; margin-top: 4px; }
+
+/* ---------- 체크리스트 ---------- */
+.lists { display: grid; gap: 16px; margin-top: 28px; }
+.group { background: var(--night-2); border-radius: var(--r); padding: 20px 16px; }
+.group h3 { color: var(--lav); margin-bottom: 8px; }
+.item { position: relative; display: flex; align-items: center; gap: 12px; padding: 10px 6px; border-radius: 14px; cursor: pointer; }
+.item:hover { background: var(--night-3); }
+.item input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.box {
+  flex: none; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--night); border: 2px solid var(--lav);
+  display: grid; place-items: center; transition: background .25s, border-color .25s, transform .25s var(--ease);
+}
+.box svg { width: 16px; opacity: 0; transform: scale(.4); transition: opacity .2s, transform .3s var(--ease); color: var(--paper-ink); }
+.item input:checked + .box { background: var(--gold); border-color: var(--gold); transform: scale(1.08); }
+.item input:checked + .box svg { opacity: 1; transform: none; }
+.item input:checked ~ .label { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: var(--gold); }
+.item input:focus-visible + .box { outline: 3px solid var(--gold); outline-offset: 3px; }
+.progress { margin-top: 16px; font-family: var(--display); font-size: 1.3rem; color: var(--gold); }
+.bar { height: 12px; background: var(--night-2); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+.bar i { display: block; height: 100%; width: 0; background: var(--gold); border-radius: 99px; transition: width .5s var(--ease); }
+.reset { margin-top: 14px; font: inherit; font-size: .9rem; color: var(--ink-soft); background: none; border: 0; text-decoration: underline; cursor: pointer; padding: 6px 0; }
+.dust { position: absolute; left: 20px; top: 50%; width: 10px; height: 10px; pointer-events: none; color: var(--gold); animation: dust .7s var(--ease) forwards; }
+@keyframes dust { from { transform: translate(0,0) scale(.4) rotate(0); opacity: 1; } to { transform: translate(var(--x), var(--y)) scale(1.2) rotate(120deg); opacity: 0; } }
+
+/* ---------- 마무리 ---------- */
+footer { padding: 96px 0 40px; text-align: center; }
+footer .big { font-family: var(--display); font-size: clamp(2.4rem, 11vw, 5rem); color: var(--gold); line-height: 1.1; }
+footer p { color: var(--ink-soft); font-size: .9rem; margin-top: 14px; }
+footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 4px; font-size: 13px; color: var(--ink-soft); }
+
+/* ---------- 떠오르기 ---------- */
+.js .rise { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.js .rise.in { opacity: 1; transform: none; }
+
+@media (min-width: 720px) {
+  :root { --gutter: 32px; }
+  section { padding-block: 140px 24px; }
+  .days { grid-template-columns: repeat(2, 1fr); }
+  .parks { grid-template-columns: 1fr 1fr; }
+  .guide { grid-template-columns: 1fr 1fr; }
+  .places { grid-template-columns: repeat(2, 1fr); }
+  .lists { grid-template-columns: repeat(2, 1fr); }
+  .stay { grid-template-columns: 1.1fr 1fr; padding: 32px; }
+  .tabbar { left: 50%; right: auto; transform: translateX(-50%); bottom: 14px; border-radius: 999px; width: min(560px, 92vw); padding: 6px; }
+  body { padding-bottom: 96px; }
+}
+@media (min-width: 1040px) {
+  .places { grid-template-columns: repeat(3, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .rise { opacity: 1; transform: none; }
+  .gate { display: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true"></div>
+
+<header class="hero" id="top">
+  <svg class="burst b1" style="left:8%;top:12%" viewBox="0 0 100 100" aria-hidden="true"><g stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M50 8v18M50 74v18M8 50h18M74 50h18M20 20l12 12M68 68l12 12M80 20 68 32M32 68 20 80"/></g></svg>
+  <svg class="burst b2" style="right:6%;top:20%" viewBox="0 0 100 100" aria-hidden="true"><g stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M50 8v18M50 74v18M8 50h18M74 50h18M20 20l12 12M68 68l12 12M80 20 68 32M32 68 20 80"/></g></svg>
+  <svg class="burst b3" style="left:58%;top:4%" viewBox="0 0 100 100" aria-hidden="true"><g stroke="currentColor" stroke-width="4" stroke-linecap="round"><path d="M50 8v18M50 74v18M8 50h18M74 50h18M20 20l12 12M68 68l12 12M80 20 68 32M32 68 20 80"/></g></svg>
+
+  <div class="hero-inner">
+    <svg class="castle" viewBox="0 0 320 200" aria-hidden="true">
+      <g fill="currentColor">
+        <path d="M40 200V110h30v90zM250 200V110h30v90z"/>
+        <path d="M34 112 55 60l21 52zM244 112l21-52 21 52z"/>
+        <path d="M90 200V90h40v110zM190 200V90h40v110z"/>
+        <path d="M84 92l26-52 26 52zM184 92l26-52 26 52z"/>
+        <path d="M130 200V70h60v130z"/>
+        <path d="M124 72 160 4l36 68z"/>
+        <path d="M20 200v-40h280v40z"/>
+      </g>
+      <g class="win">
+        <rect x="152" y="92" width="16" height="22" rx="8"/>
+        <rect x="104" y="112" width="12" height="16" rx="6"/>
+        <rect x="204" y="112" width="12" height="16" rx="6"/>
+        <rect x="50" y="130" width="10" height="14" rx="5"/>
+        <rect x="260" y="130" width="10" height="14" rx="5"/>
+        <path d="M144 200v-34a16 16 0 0 1 32 0v34z"/>
+      </g>
+    </svg>
+    <h1><span>별빛 도쿄,</span><span>꿈의 나라로</span></h1>
+    <p class="sub">2027년 3월 말, 5박 6일 도쿄 여행 수첩. 첫 3일은 마이하마에서 테마파크와 함께.</p>
+    <p class="dday" aria-live="polite"><span id="dday">D-?</span><small id="ddayNote">출발일 미정</small></p>
+    <a class="go" href="#plan">일정 펼쳐보기 ↓</a>
+  </div>
+
+  <div class="gate" aria-hidden="true"><div class="door l"></div><div class="door r"></div></div>
+</header>
+
+<nav class="tabbar" aria-label="섹션 이동">
+  <a href="#plan">일정</a>
+  <a href="#stay">숙소</a>
+  <a href="#park">디즈니</a>
+  <a href="#places">가볼 곳</a>
+  <a href="#pack">준비물</a>
+</nav>
+
+<main>
+  <!-- ========== 일정표 ========== -->
+  <section id="plan" class="wrap">
+    <h2 class="rise">여섯 장의 하루 티켓</h2>
+    <p class="lead rise">날짜는 아직 미정이에요. 정해지면 각 장에 날짜를 적어 넣으면 됩니다. 금빛 티켓이 테마파크 가는 날이에요.</p>
+
+    <div class="days">
+      <article class="ticket rise">
+        <div class="stub"><b>1</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">날짜 미정 · 도착하는 날</p>
+          <h3>도쿄 도착, 마이하마로</h3>
+          <ul>
+            <li>공항에서 리무진 버스로 호텔 바로 앞까지 (예약 필수)</li>
+            <li>15:00 체크인 <a class="src" href="https://www.maihamahotel-firstresort.jp/en/" target="_blank" rel="noopener">출처: 호텔 공식</a></li>
+            <li>저녁: 마이하마역 앞 쇼핑몰 구경, 내일을 위해 일찍 쉬기</li>
+            <li>공식 앱 설치하고 입장권 등록해두기</li>
+          </ul>
+          <span class="tag">숙소: 도쿄 베이 마이하마 호텔 퍼스트 리조트</span>
+        </div>
+      </article>
+
+      <article class="ticket magic rise">
+        <svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20 0l4 16 16 4-16 4-4 16-4-16L0 20l16-4z"/></svg>
+        <div class="stub"><b>2</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">날짜 미정 · 하이라이트 첫째 날</p>
+          <h3>도쿄 디즈니랜드</h3>
+          <ul>
+            <li>호텔 무료 셔틀로 디즈니랜드까지 5~15분 <a class="src" href="https://www.maihamahotel-firstresort.jp/en/access/" target="_blank" rel="noopener">출처: 호텔 공식</a></li>
+            <li>개장 전에 도착해서 입장 직후 앱으로 프리미어 액세스 확인</li>
+            <li>낮 퍼레이드, 밤 일렉트리컬 퍼레이드까지 꽉 채우기</li>
+            <li>폐장 후 셔틀로 호텔 복귀</li>
+          </ul>
+          <span class="tag">추천 동선은 아래 디즈니 가이드에</span>
+        </div>
+      </article>
+
+      <article class="ticket magic rise">
+        <svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20 0l4 16 16 4-16 4-4 16-4-16L0 20l16-4z"/></svg>
+        <div class="stub"><b>3</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">날짜 미정 · 하이라이트 둘째 날</p>
+          <h3>도쿄 디즈니씨</h3>
+          <ul>
+            <li>아침 일찍 체크아웃 (12:00까지) 후 짐 맡기기 <span class="check">짐 보관 확인 필요</span></li>
+            <li>호텔 → 베이사이드역 셔틀 약 5분, 모노레일로 디즈니씨역</li>
+            <li>판타지 스프링스부터 먼저, 저녁엔 바다 위 야간 쇼</li>
+            <li>밤에 짐 찾아서 도쿄 시내 숙소로 이동 <span class="check">숙소 미정</span></li>
+          </ul>
+          <span class="tag">유료 짐 배송(역까지 1개 800엔)도 있어요</span>
+        </div>
+      </article>
+
+      <article class="ticket rise">
+        <div class="stub"><b>4</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">날짜 미정 · 옛 도쿄와 하늘</p>
+          <h3>아사쿠사 · 스카이트리</h3>
+          <ul>
+            <li>오전: 센소지와 나카미세 거리 산책</li>
+            <li>점심 후 스미다강 따라 걸어서 스카이트리</li>
+            <li>저녁: 우에노 공원 밤 벚꽃 (3월 말 개화 시기 <span class="check">확인 필요</span>)</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="ticket rise">
+        <div class="stub"><b>5</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">날짜 미정 · 젊은 도쿄</p>
+          <h3>하라주쿠 · 시부야 · 신주쿠</h3>
+          <ul>
+            <li>오전: 메이지 신궁 숲길 → 하라주쿠 다케시타 거리</li>
+            <li>오후: 신주쿠 교엔 벚꽃 피크닉</li>
+            <li>저녁: 시부야 스크램블 교차로와 전망대 야경</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="ticket rise">
+        <div class="stub"><b>6</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">날짜 미정 · 돌아가는 날</p>
+          <h3>도쿄역 · 긴자, 그리고 귀국</h3>
+          <ul>
+            <li>오전: 도쿄역 마루노우치 붉은 벽돌 역사 구경</li>
+            <li>긴자에서 마지막 쇼핑과 기념품</li>
+            <li>공항으로 출발 (항공편 시간 <span class="check">확인 필요</span>)</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 숙소 ========== -->
+  <section id="stay" class="wrap">
+    <h2 class="rise">마이하마의 2박 숙소</h2>
+    <div class="stay rise">
+      <div>
+        <h3>도쿄 베이 마이하마 호텔 퍼스트 리조트</h3>
+        <p style="margin-top:8px">도쿄 디즈니 리조트 오피셜 호텔. 체크인 15:00, 체크아웃 12:00. <a class="src" href="https://www.maihamahotel-firstresort.jp/en/" target="_blank" rel="noopener">출처: 호텔 공식</a></p>
+        <p style="margin-top:8px">투숙객은 미리 신청해 두면, 공식 사이트에서 매진된 날에도 호텔에서 입장권을 살 수 있어요. 마이하마역 웰컴센터에 짐을 맡기면 호텔까지 무료로 배달해줘요(8:00~15:00). <a class="src" href="https://maihamahotel-firstresort.jp/en/hotel-attractions/privileges-for-official-hotel-guests" target="_blank" rel="noopener">출처: 호텔 공식</a></p>
+        <p style="margin-top:8px">주소: 지바현 우라야스시 마이하마 1-6</p>
+      </div>
+      <div class="btns">
+        <a class="btn gold" href="https://www.maihamahotel-firstresort.jp/en/accommodations-and-benefits/restaurant-reservations/" target="_blank" rel="noopener">숙박 예약하기 <small>공식 예약 달력 ↗</small></a>
+        <a class="btn" href="https://webservice.limousinebus.co.jp/web/jp/ReservationTop.aspx?AirportLine=1&amp;Direction=2&amp;DepartureArea=042&amp;DepartureBusstop=307&amp;ArrivalArea=047" target="_blank" rel="noopener">나리타 ↔ 호텔 버스 예약 <small>↗</small></a>
+        <a class="btn" href="https://webservice.limousinebus.co.jp/web/jp/ReservationTop.aspx?AirportLine=2&amp;Direction=2&amp;DepartureArea=042&amp;DepartureBusstop=307&amp;ArrivalArea=060" target="_blank" rel="noopener">하네다 ↔ 호텔 버스 예약 <small>↗</small></a>
+        <ul class="shuttles">
+          <li><b>공항 리무진 버스</b> · 예약 필수. 나리타 약 90분 어른 2,900엔, 하네다 약 60분 어른 1,300엔. 예약 페이지는 일본어예요. <a class="src" href="https://www.maihamahotel-firstresort.jp/en/access/" target="_blank" rel="noopener">출처: 호텔 공식</a> <span class="check">2027년 요금 확인 필요</span></li>
+          <li><b>호텔 무료 셔틀</b> · 예약 없이 탑승. 베이사이드역 약 10분 간격(7:03~22:30), 마이하마역 남쪽 출구, 디즈니랜드 직행. <a class="src" href="https://www.maihamahotel-firstresort.jp/en/access/" target="_blank" rel="noopener">출처: 호텔 공식</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 디즈니 가이드 ========== -->
+  <section id="park" class="wrap">
+    <h2 class="rise">두 개의 꿈의 나라</h2>
+    <p class="lead rise">하루에 한 곳씩. 둘 다 같은 리조트 안에 있고 모노레일로 이어져 있어요.</p>
+
+    <div class="parks">
+      <article class="park land rise">
+        <h3>디즈니랜드</h3>
+        <dl>
+          <dt>분위기</dt><dd>성이 중심인 동화 마을. 처음 가는 사람에게 딱.</dd>
+          <dt>볼거리</dt><dd>낮 퍼레이드와 밤의 일렉트리컬 퍼레이드, 성 앞 공연</dd>
+          <dt>이런 날에</dt><dd>신나게 놀이기구 타고 퍼레이드 보는 날</dd>
+          <dt>가는 길</dt><dd>호텔 무료 셔틀 직행 5~15분</dd>
+        </dl>
+      </article>
+      <article class="park sea rise">
+        <h3>디즈니씨</h3>
+        <dl>
+          <dt>분위기</dt><dd>바다와 항구를 테마로 한 모험의 나라. 어른 취향.</dd>
+          <dt>볼거리</dt><dd>바다 위에서 펼쳐지는 쇼, 2024년 문을 연 판타지 스프링스</dd>
+          <dt>이런 날에</dt><dd>풍경 보며 걷고, 맛있는 거 먹고, 사진 남기는 날</dd>
+          <dt>가는 길</dt><dd>셔틀로 베이사이드역 → 모노레일 디즈니씨역</dd>
+        </dl>
+      </article>
+    </div>
+
+    <div class="guide">
+      <article class="panel rise">
+        <h3>입장권</h3>
+        <p>날짜마다 가격이 다른 날짜 지정권이에요. 공식 사이트나 앱에서 날짜를 골라 사요.</p>
+        <table class="price">
+          <tr><th scope="row">1일권 어른 (18세 이상)</th><td>7,900~12,400엔</td></tr>
+          <tr><th scope="row">1일권 중고생 (12~17세)</th><td>6,600~9,000엔</td></tr>
+          <tr><th scope="row">1일권 어린이 (4~11세)</th><td>4,700~5,900엔</td></tr>
+        </table>
+        <p><a class="src" href="https://tdrexplorer.com/october-2026-tokyo-disneyland-ticket-prices-rise-as-variable-pricing-hits-new-high/" target="_blank" rel="noopener">출처: TDR Explorer (2026년 10월 기준)</a> · <a class="src" href="https://www.tokyodisneyresort.jp/en/tdl/monthly/calendar.html" target="_blank" rel="noopener">공식 가격 달력</a></p>
+        <p style="margin-top:8px">2027년 3월 가격은 <span class="check">확인 필요</span> 성수기라 비싼 쪽일 가능성이 커요.</p>
+        <p style="margin-top:8px">줄 서는 시간을 줄여주는 <b>프리미어 액세스</b>는 유료(놀이기구 1회 1,000~2,500엔 정도)이고 입장 후 앱에서만 살 수 있어요. <a class="src" href="https://disneyblog.com/destinations/tokyo-disney-resort/premier-access/" target="_blank" rel="noopener">출처: Disney Blog</a></p>
+      </article>
+
+      <article class="panel rise">
+        <h3>운영시간 · 퍼레이드 · 불꽃놀이</h3>
+        <ul>
+          <li>보통 9:00~21:00 운영 (2026년 여름 기준). 날짜마다 달라요. <a class="src" href="https://www.tokyodisneyresort.jp/en/tdl/daily/calendar/20260731/" target="_blank" rel="noopener">출처: 공식</a> <span class="check">2027년 3월 확인 필요</span></li>
+          <li>한 달 치 공연 일정은 <b>전달 8일쯤</b> 공개돼요. 3월 일정은 2027년 2월 8일 무렵에 확인. <a class="src" href="https://www.tokyodisneyresort.jp/en/tdl/show.html" target="_blank" rel="noopener">출처: 공식</a></li>
+          <li>당일 시간은 개장 후 공식 앱의 공연 페이지에서 확인. 바뀐 시간은 빨간 글씨로 나와요. <a class="src" href="https://www.tokyodisneyresort.jp/en/tdr/guide/app_service.html" target="_blank" rel="noopener">출처: 공식</a></li>
+          <li>불꽃놀이는 바람이 세면 취소될 수 있어요. 2027년 불꽃놀이 운영 여부 <span class="check">확인 필요</span></li>
+          <li>호텔 프런트에서도 그날 운영시간과 이벤트를 알려줘요. <a class="src" href="https://maihamahotel-firstresort.jp/en/hotel-attractions/privileges-for-official-hotel-guests" target="_blank" rel="noopener">출처: 호텔 공식</a></li>
+        </ul>
+      </article>
+
+      <article class="panel rise">
+        <h3>디즈니랜드 추천 동선</h3>
+        <ol class="route">
+          <li><span class="t">아침</span>개장 30~60분 전 도착, 입장하자마자 앱으로 프리미어 액세스 시간 확인</li>
+          <li><span class="t">오전</span>인기 놀이기구 먼저 (줄이 짧은 시간)</li>
+          <li><span class="t">점심</span>11시 전에 먹기, 사람 몰리기 전에</li>
+          <li><span class="t">오후</span>낮 퍼레이드 자리 30분 전 잡기, 기념품은 이때 미리 보기</li>
+          <li><span class="t">밤</span>일렉트리컬 퍼레이드 → 폐장 직전 쇼핑 → 셔틀로 복귀</li>
+        </ol>
+      </article>
+
+      <article class="panel rise">
+        <h3>디즈니씨 추천 동선</h3>
+        <ol class="route">
+          <li><span class="t">아침</span>체크아웃·짐 정리 후 셔틀 첫 차(7:00대) 노리기</li>
+          <li><span class="t">오전</span>판타지 스프링스부터, 대기가 가장 길어요</li>
+          <li><span class="t">점심</span>항구 풍경 보면서 여유 있게</li>
+          <li><span class="t">오후</span>지역마다 사진 찍기 좋은 곳 돌기</li>
+          <li><span class="t">밤</span>바다 위 야간 쇼 보고 짐 찾아 시내로 <span class="check">쇼 운영 확인 필요</span></li>
+        </ol>
+      </article>
+
+      <article class="panel rise">
+        <h3>파크 가방 준비물</h3>
+        <ul>
+          <li>보조배터리 (앱을 하루 종일 써요)</li>
+          <li>앱에 등록한 입장권, 신용카드</li>
+          <li>3월 말 밤은 쌀쌀해요, 얇은 겉옷 하나</li>
+          <li>퍼레이드 자리용 작은 돗자리</li>
+          <li>편한 운동화, 작은 우산이나 우비</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 가볼 곳 ========== -->
+  <section id="places" class="wrap">
+    <h2 class="rise">테마파크 다음 3일, 도쿄 산책</h2>
+    <p class="lead rise">4일차부터 갈 곳들이에요. 3월 말이라 벚꽃 명소를 많이 넣었어요.</p>
+    <div class="places" id="placeList"></div>
+  </section>
+
+  <!-- ========== 체크리스트 ========== -->
+  <section id="pack" class="wrap">
+    <h2 class="rise">반짝반짝 준비물</h2>
+    <p class="lead rise">하나씩 체크하면 별가루가 터져요. 체크한 건 이 휴대폰에 저장돼요.</p>
+    <p class="progress rise" id="progText">0개 챙겼어요</p>
+    <div class="bar rise"><i id="progBar"></i></div>
+    <div class="lists" id="lists"></div>
+    <button class="reset" id="reset" type="button">체크 모두 지우기</button>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p class="big">꿈의 나라에서<br>만나요</p>
+  <p>개인용 여행 수첩. 캐릭터, 로고, 공식 사진은 쓰지 않았어요. 가격과 시간은 떠나기 전에 공식 사이트에서 다시 확인해요.</p>
+  <ul>
+    <li>출처: 도쿄 베이 마이하마 호텔 퍼스트 리조트 공식 사이트 (maihamahotel-firstresort.jp)</li>
+    <li>출처: 도쿄 디즈니 리조트 공식 사이트 (tokyodisneyresort.jp)</li>
+    <li>출처: TDR Explorer, Disney Blog (2026년 11월 확인)</li>
+  </ul>
+</footer>
+
+<script>
+// 출발일이 정해지면 여기만 바꾸세요. 예: '2027-03-25'
+const TRIP_START = null;
+const ASSUMED_START = '2027-03-25'; // 날짜 미정일 때 임시 기준
+
+document.documentElement.classList.add('js');
+
+// ----- 성문 열기 -----
+const hero = document.querySelector('.hero');
+requestAnimationFrame(() => hero.classList.add('open'));
+setTimeout(() => hero.classList.add('opened'), 2200);
+
+// ----- 별 뿌리기 (모바일 부담 줄이려고 40개만) -----
+const sky = document.querySelector('.sky');
+for (let i = 0; i < 40; i++) {
+  const s = document.createElement('i');
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.animationDelay = (Math.random() * 3.6).toFixed(2) + 's';
+  if (i % 5 === 0) { s.style.width = s.style.height = '4px'; }
+  sky.appendChild(s);
+}
+
+// ----- D-day -----
+function daysUntil(iso, now) {
+  const [y, m, d] = iso.split('-').map(Number);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  return Math.round((new Date(y, m - 1, d) - today) / 86400000);
+}
+console.assert(daysUntil('2027-03-25', new Date(2027, 2, 24)) === 1, 'daysUntil');
+console.assert(daysUntil('2027-03-25', new Date(2027, 2, 25, 23)) === 0, 'daysUntil same day');
+(function () {
+  const iso = TRIP_START || ASSUMED_START;
+  const n = daysUntil(iso, new Date());
+  const [, m, d] = iso.split('-').map(Number);
+  document.getElementById('dday').textContent = n > 0 ? 'D-' + n : n === 0 ? 'D-DAY' : '즐거웠어요';
+  document.getElementById('ddayNote').textContent = TRIP_START
+    ? '출발 ' + m + '월 ' + d + '일'
+    : m + '월 ' + d + '일 출발로 가정 · 날짜 미정';
+})();
+
+// ----- 가볼 곳 -----
+const places = [
+  ['센소지 · 나카미세 거리', '다이토구 아사쿠사', '커다란 붉은 등이 걸린 도쿄에서 가장 오래된 절과 군것질 거리'],
+  ['도쿄 스카이트리', '스미다구 오시아게', '634m 전망대에서 내려다보는 도쿄 전체, 날씨 좋으면 후지산까지'],
+  ['우에노 공원', '다이토구 우에노', '약 800그루 벚꽃길, 밤이면 등불이 켜지는 꽃놀이 명소'],
+  ['메이지 신궁', '시부야구 요요기', '도심 한가운데 울창한 숲길을 걷는 조용한 신사'],
+  ['하라주쿠 다케시타 거리', '시부야구 하라주쿠', '알록달록 크레이프와 귀여운 가게가 줄지은 골목'],
+  ['신주쿠 교엔', '신주쿠구', '넓은 잔디밭과 여러 품종 벚꽃, 봄 피크닉에 딱'],
+  ['시부야 스크램블 교차로', '시부야구 시부야', '한 번에 수천 명이 건너는 그 교차로, 위에서 보면 더 신기해요'],
+  ['도쿄타워', '미나토구 시바코엔', '밤에 주황빛으로 빛나는 도쿄의 상징'],
+  ['도쿄역 마루노우치', '지요다구 마루노우치', '100년 넘은 붉은 벽돌 역 건물과 역 안 기념품 거리'],
+  ['긴자', '주오구 긴자', '반짝이는 백화점 거리, 마지막 날 쇼핑과 디저트'],
+];
+document.getElementById('placeList').innerHTML = places.map(([name, loc, desc]) => `
+  <article class="place rise">
+    <div class="photo" role="img" aria-label="${name} 사진 자리"><span>사진 들어갈 곳</span></div>
+    <div class="info">
+      <h3>${name}</h3>
+      <p class="loc">${loc}</p>
+      <p>${desc}</p>
+    </div>
+  </article>`).join('');
+
+// ----- 체크리스트 -----
+const groups = {
+  '서류 · 돈': ['여권 (만료일 6개월 이상)', '항공권 e-티켓', '호텔 예약 확인서', '리무진 버스 예약 확인', '엔화 조금 + 해외 결제 카드', '여행자 보험'],
+  '디즈니 날': ['입장권 2일치 구매', '공식 앱 설치 · 입장권 등록', '보조배터리 + 케이블', '작은 돗자리', '얇은 겉옷', '편한 운동화'],
+  '휴대폰 · 전자': ['eSIM 또는 포켓 와이파이', '일본 돼지코 어댑터', '교통카드 앱 (스이카 등)', '충전기'],
+  '생활': ['옷 (3월 말 쌀쌀함)', '세면도구 · 상비약', '접이식 우산', '기념품 담을 접는 가방'],
+};
+const KEY = 'tokyo-pack-v1';
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+const lists = document.getElementById('lists');
+let idx = 0;
+lists.innerHTML = Object.entries(groups).map(([title, items]) => `
+  <div class="group rise">
+    <h3>${title}</h3>
+    ${items.map(t => { const id = 'c' + idx++; return `
+    <label class="item">
+      <input type="checkbox" id="${id}" ${saved[id] ? 'checked' : ''}>
+      <span class="box" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="label">${t}</span>
+    </label>`; }).join('')}
+  </div>`).join('');
+
+const boxes = [...lists.querySelectorAll('input')];
+function progress() {
+  const n = boxes.filter(b => b.checked).length;
+  document.getElementById('progText').textContent =
+    n === boxes.length ? '모두 챙겼어요! 떠날 준비 완료' : `${boxes.length}개 중 ${n}개 챙겼어요`;
+  document.getElementById('progBar').style.width = (n / boxes.length * 100) + '%';
+}
+function save() {
+  const s = {}; boxes.forEach(b => { if (b.checked) s[b.id] = 1; });
+  try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {}
+}
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const colors = ['var(--gold)', 'var(--pink)', 'var(--sky)', 'var(--lav)'];
+function sparkle(label) {
+  if (reduce) return;
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2;
+    const d = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    d.setAttribute('viewBox', '0 0 10 10');
+    d.setAttribute('class', 'dust');
+    d.innerHTML = '<path fill="currentColor" d="M5 0l1.2 3.8L10 5 6.2 6.2 5 10 3.8 6.2 0 5l3.8-1.2z"/>';
+    d.style.color = colors[i % 4];
+    d.style.setProperty('--x', Math.cos(a) * 34 + 'px');
+    d.style.setProperty('--y', Math.sin(a) * 34 - 5 + 'px');
+    label.appendChild(d);
+    d.addEventListener('animationend', () => d.remove());
+  }
+}
+lists.addEventListener('change', e => {
+  if (e.target.checked) sparkle(e.target.closest('.item'));
+  progress(); save();
+});
+document.getElementById('reset').addEventListener('click', () => {
+  if (!confirm('체크한 준비물을 모두 지울까요?')) return;
+  boxes.forEach(b => b.checked = false); progress(); save();
+});
+progress();
+
+// ----- 스크롤하면 살짝 떠오르기 -----
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    // 빠르게 스크롤해서 지나친 요소도 보이게
+    if (!en.isIntersecting && en.boundingClientRect.top > 0) return;
+    en.target.classList.add('in');
+    io.unobserve(en.target);
+  });
+}, { rootMargin: '0px 0px 10% 0px' });
+document.querySelectorAll('.rise').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 70 + 'ms';
+  io.observe(el);
+});
+
+// ----- 아래 바 현재 위치 표시 -----
+const tabs = [...document.querySelectorAll('.tabbar a')];
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) tabs.forEach(t => t.classList.toggle('on', t.hash === '#' + en.target.id));
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+document.querySelectorAll('main section').forEach(s => spy.observe(s));
+</script>
+</body>
+</html>

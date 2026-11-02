@@ -212,8 +212,23 @@ section { padding-block: 88px 24px; scroll-margin-top: 8px; }
 .place:nth-child(4n+3) .photo { background: var(--lav); }
 .place:nth-child(4n+4) .photo { background: #f6dc98; }
 .place .info { padding: 16px 18px 20px; }
+.tower { margin-top: 28px; scroll-margin-top: 16px; display: grid; gap: 14px; }
 .place .loc { font-size: .88rem; color: var(--sky); }
 .place p { font-size: 1rem; margin-top: 4px; }
+.note { font-size: 13px; color: var(--ink-soft); }
+.decks { display: grid; gap: 10px; margin-bottom: 14px; }
+.decks div { background: var(--night-3); border-radius: 16px; padding: 12px 14px; }
+.decks b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.15rem; color: var(--sky); }
+.decks p { font-size: .95rem; }
+.food { margin-top: 28px; scroll-margin-top: 16px; }
+.food h4 { font-family: var(--display); font-weight: 400; font-size: 1.15rem; color: var(--lav); margin: 22px 0 10px; }
+.eats { list-style: none; padding: 0 !important; display: grid; gap: 10px; }
+.eats li { background: var(--night-3); border-radius: 16px; padding: 14px; }
+.eats b { font-family: var(--display); font-weight: 400; font-size: 1.15rem; margin-right: 8px; }
+.eats .kind { display: inline-block; font-size: 13px; padding: 1px 10px; border-radius: 99px; background: var(--night); color: var(--sky); }
+.eats .monja .kind { background: var(--gold); color: var(--paper-ink); }
+.eats p { margin-top: 6px; }
+.eats .meta { font-size: .9rem; color: var(--ink-soft); }
 
 /* ---------- 체크리스트 ---------- */
 .lists { display: grid; gap: 16px; margin-top: 28px; }
@@ -256,6 +271,7 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
   .parks { grid-template-columns: 1fr 1fr; }
   .guide { grid-template-columns: 1fr 1fr; }
   .places { grid-template-columns: repeat(2, 1fr); }
+  .tower { grid-template-columns: 1fr 1fr; gap: 0 36px; padding: 28px 32px; }
   .lists { grid-template-columns: repeat(2, 1fr); }
   .stay { grid-template-columns: 1.1fr 1fr; padding: 32px; }
   .tabbar { left: 50%; right: auto; transform: translateX(-50%); bottom: 14px; border-radius: 999px; width: min(560px, 92vw); padding: 6px; }
@@ -378,10 +394,13 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
           <p class="when">날짜 미정 · 옛 도쿄와 하늘</p>
           <h3>아사쿠사 · 스카이트리</h3>
           <ul>
-            <li>오전: 센소지와 나카미세 거리 산책</li>
-            <li>점심 후 스미다강 따라 걸어서 스카이트리</li>
+            <li>오전: 맑으면 스카이트리 전망대부터 (오전이 전망 좋아요, 1~2시간)</li>
+            <li>전망대는 온라인으로 미리 예약 (현장 구매는 1장당 500엔 추가). 350m 1,800엔부터 <span class="note">2026년 10월 기준, 날짜별 변동</span></li>
+            <li>점심: 아래층 소라마치에서 몬자야끼 (<a href="#food">맛집 보기</a>)</li>
+            <li>오후: 도부 스카이트리선 1정거장 아사쿠사역 → 센소지와 나카미세 거리</li>
             <li>저녁: 우에노 공원 밤 벚꽃 (3월 말 개화 시기 <span class="check">확인 필요</span>)</li>
           </ul>
+          <a class="tag" href="#skytree">전망대 요금과 예약은 가볼 곳에</a>
         </div>
       </article>
 
@@ -389,11 +408,12 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
         <div class="stub"><b>5</b><span>일차</span></div>
         <div class="tbody">
           <p class="when">날짜 미정 · 젊은 도쿄</p>
-          <h3>하라주쿠 · 시부야 · 신주쿠</h3>
+          <h3>하라주쿠 · 신주쿠 · 나카메구로 · 시부야</h3>
           <ul>
-            <li>오전: 메이지 신궁 숲길 → 하라주쿠 다케시타 거리</li>
-            <li>오후: 신주쿠 교엔 벚꽃 피크닉</li>
-            <li>저녁: 시부야 스크램블 교차로와 전망대 야경</li>
+            <li>오전: 하라주쿠 다케시타 거리 구경</li>
+            <li>오후: 신주쿠 교엔 벚꽃 피크닉 <span class="check">휴원일 확인 필요</span></li>
+            <li>해 질 무렵: 나카메구로로 이동, 메구로강 벚꽃길 산책과 저녁 식사 (18시 전후 도착 추천). 벚꽃철엔 붐비니 미리 예약 <span class="check">2027년 등불 일정 확인 필요</span></li>
+            <li>밤: 시부야로 돌아와 스크램블 교차로와 전망대 야경</li>
           </ul>
         </div>
       </article>
@@ -530,7 +550,95 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
   <section id="places" class="wrap">
     <h2 class="rise">테마파크 다음 3일, 도쿄 산책</h2>
     <p class="lead rise">4일차부터 갈 곳들이에요. 3월 말이라 벚꽃 명소를 많이 넣었어요.</p>
+
+    <article class="panel tower rise" id="skytree">
+      <div>
+        <h3>스카이트리 전망대</h3>
+        <div class="decks">
+          <div><b>텐보 데크 · 350m</b><p>첫 번째 전망대. 아래층(340층)에 발밑이 내려다보이는 유리 바닥이 있어요.</p></div>
+          <div><b>텐보 갤러리아 · 450m</b><p>나선형으로 빙 돌아 오르는 공중 회랑(스카이워크). 350m 입장권이 있어야 갈 수 있어요.</p></div>
+        </div>
+        <p class="note">2026년 10월 기준, 날짜별 변동 <span class="check">2027년 3월 가격 확인 필요</span></p>
+        <table class="price">
+          <tr><th scope="row">350m 텐보 데크 (어른)</th><td>1,800엔부터</td></tr>
+          <tr><th scope="row">350m + 450m 세트 (어른)</th><td>3,000엔부터</td></tr>
+        </table>
+        <p>온라인 기준 요금이고, 날짜에 따라 올라가요. 어른은 15세 이상, 6~14세는 900엔·1,500엔부터, 5세 이하는 무료예요. <a class="src" href="https://en.tokyo-skytree.jp/ticket/" target="_blank" rel="noopener">출처: 공식</a></p>
+      </div>
+      <div>
+        <ul>
+          <li>현장에서 사면 1장당 500엔이 더 붙고, 붐비는 날엔 현장 판매가 멈출 수 있어요. <a class="src" href="https://en.tokyo-skytree.jp/ticket/admission/" target="_blank" rel="noopener">출처: 공식</a></li>
+          <li>450m만 따로는 못 가요. 현장에서 추가하면 어른 1,400엔이라 세트로 사는 편이 저렴해요. <a class="src" href="https://www.japan-travel-kit.com/guides/attractions/tokyo-skytree-tickets" target="_blank" rel="noopener">출처: Japan Travel Kit</a></li>
+          <li>보통 10시 개장으로 알려져 있지만, 공식 사이트의 2026년 11월 2일 운영시간은 9:00~22:00이었어요. 마지막 입장은 폐장 1시간 전. 날짜마다 다르고 3월 말은 벚꽃 행사로 바뀔 수 있어요. <a class="src" href="https://en.tokyo-skytree.jp/open-hours/" target="_blank" rel="noopener">출처: 공식</a> <span class="check">2027년 3월 운영시간 확인 필요</span></li>
+          <li>가는 법: 아사쿠사역에서 도부 스카이트리선 1정거장 "도쿄 스카이트리역", 또는 오시아게역. <a class="src" href="https://www.tobu.co.jp/en/access/skytree/" target="_blank" rel="noopener">출처: 도부 철도</a></li>
+          <li>팁: 맑은 날 오전이 전망 좋아요. 1~2시간 걸리고, 식사는 아래층 도쿄 소라마치에서.</li>
+          <li>입장 전 취소는 되지만 수수료가 있어요. 날짜가 정해진 뒤에 사요. <a class="src" href="https://en.tokyo-skytree.jp/ticket/web-purchase/" target="_blank" rel="noopener">출처: 공식</a> <span class="check">판매 시작일·해외 카드 결제 확인 필요</span></li>
+        </ul>
+        <div class="btns">
+          <a class="btn gold" href="https://en.tokyo-skytree.jp/ticket/" target="_blank" rel="noopener">전망대 표 예약하기 <small>공식 사이트 ↗</small></a>
+          <a class="btn line" href="https://en.tokyo-skytree.jp/open-hours/" target="_blank" rel="noopener">운영시간 달력 <small>↗</small></a>
+        </div>
+      </div>
+    </article>
+
     <div class="places" id="placeList"></div>
+
+    <article class="panel food rise" id="food">
+      <h3>스카이트리 · 아사쿠사 맛집</h3>
+      <p>4일차 동선 근처에서 골랐어요. 영업시간은 블로그·맛집 사이트 정보라 가기 전에 다시 확인해요.</p>
+
+      <h4>스카이트리 아래 · 도쿄 소라마치</h4>
+      <ul class="eats">
+        <li class="monja">
+          <b>츠키시마 몬자 다루마 (소라마치점)</b><span class="kind">몬자야끼</span>
+          <p>스카이트리 바로 아래 소라마치 안에 있는 몬자야끼 집. 점심 동선에 딱 맞아요. 저녁엔 1시간 가까이 줄 섰다는 후기도 있어요.</p>
+          <p class="meta">10:30~23:00 (마지막 주문 21:45) <span class="check">2015년 게시 정보, 확인 필요</span> <a class="src" href="https://gurunavi.com/ja/e474601/rev/rst" target="_blank" rel="noopener">출처: 구루나비</a></p>
+        </li>
+        <li>
+          <b>로쿠린샤 (소라마치점)</b><span class="kind">츠케멘</span>
+          <p>진한 국물에 굵은 면을 찍어 먹는 츠케멘으로 줄 서는 가게. 이스트 야드 6층 식당가.</p>
+          <p class="meta">영업시간 <span class="check">확인 필요</span> <a class="src" href="https://en.www.tokyo-solamachi.jp/floor/" target="_blank" rel="noopener">출처: 소라마치 공식 층 안내</a></p>
+        </li>
+      </ul>
+
+      <h4>아사쿠사</h4>
+      <ul class="eats">
+        <li class="monja">
+          <b>소메타로</b><span class="kind">몬자야끼 · 오코노미야키</span>
+          <p>다다미 방에 앉아 직접 구워 먹는 오래된 가게. 신발 벗고 들어가고, 여름엔 에어컨이 없어 더워요.</p>
+          <p class="meta">니시아사쿠사 2-2-2, 다와라마치역 3번 출구 도보 3분 · 12:00~22:30, 비정기 휴무 <span class="check">확인 필요</span> <a class="src" href="https://www.timeout.com/tokyo/restaurants/sometaro" target="_blank" rel="noopener">출처: Time Out</a></p>
+        </li>
+        <li class="monja">
+          <b>아사쿠사 츠루지로</b><span class="kind">몬자야끼 · 오코노미야키</span>
+          <p>아사쿠사역에서 걸어서 3분. 몬자야끼와 오코노미야키로 추천이 많은 집.</p>
+          <p class="meta">화요일 휴무 <span class="check">확인 필요</span> <a class="src" href="https://savorjapan.com/index.php/0006023935" target="_blank" rel="noopener">출처: Savor Japan</a></p>
+        </li>
+        <li>
+          <b>다이코쿠야 텐푸라</b><span class="kind">튀김덮밥</span>
+          <p>1887년부터 이어온 튀김집. 참기름에 튀겨 소스에 적신 진한 색 텐동이 대표 메뉴. 주말엔 줄이 길어요.</p>
+          <p class="meta"><a class="src" href="https://jw-webmagazine.com/tips/restaurants-in-asakusa" target="_blank" rel="noopener">출처: JW Web Magazine</a></p>
+        </li>
+        <li>
+          <b>아사쿠사 이마한</b><span class="kind">스키야키</span>
+          <p>1895년 창업한 스키야키 명가. 점심 메뉴가 저녁보다 저렴하고, 인기 많아 예약 추천.</p>
+          <p class="meta"><a class="src" href="https://tablejourney.com/japan/tokyo/restaurants/asakusa-imahan/" target="_blank" rel="noopener">출처: Table Journey</a></p>
+        </li>
+        <li>
+          <b>아사쿠사 카게츠도</b><span class="kind">멜론빵 간식</span>
+          <p>센소지 산책하면서 먹는 커다란 점보 멜론빵. 갓 구운 지 15분 안이 제일 맛있어요. 현금만 받아요.</p>
+          <p class="meta"><a class="src" href="https://tokyocheapo.com/food-and-drink/sweets/melon-pan-asakusa-kagetsudo/" target="_blank" rel="noopener">출처: Tokyo Cheapo</a></p>
+        </li>
+      </ul>
+
+      <h4>시간 되면 · 몬자야끼 본고장</h4>
+      <ul class="eats">
+        <li class="monja">
+          <b>츠키시마 몬자 거리</b><span class="kind">몬자야끼 거리</span>
+          <p>몬자야끼 가게가 수십 곳 모여 있는 거리(출처마다 40~80곳). 아사쿠사와는 떨어져 있어서 저녁에 따로 가볼 만해요.</p>
+          <p class="meta">츠키시마역 7번 출구에서 바로 <a class="src" href="https://www.fun-japan.jp/intl/articles/8315" target="_blank" rel="noopener">출처: FUN! JAPAN</a> · <a class="src" href="https://www.sangyo-rodo1.metro.tokyo.lg.jp/tourism/accessible/en/course18_03.html" target="_blank" rel="noopener">도쿄도 관광 안내</a></p>
+        </li>
+      </ul>
+    </article>
   </section>
 
   <!-- ========== 체크리스트 ========== -->
@@ -550,7 +658,8 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
   <ul>
     <li>출처: 도쿄 베이 마이하마 호텔 퍼스트 리조트 공식 사이트 (maihamahotel-firstresort.jp)</li>
     <li>출처: 도쿄 디즈니 리조트 공식 사이트 (tokyodisneyresort.jp)</li>
-    <li>출처: TDR Explorer, Disney Blog (2026년 11월 확인)</li>
+    <li>출처: 도쿄 스카이트리 공식 사이트 (en.tokyo-skytree.jp)</li>
+    <li>출처: TDR Explorer, Disney Blog, Japan Travel Kit (2026년 11월 확인)</li>
   </ul>
 </footer>
 
@@ -598,19 +707,20 @@ console.assert(daysUntil('2027-03-25', new Date(2027, 2, 25, 23)) === 0, 'daysUn
 // ----- 가볼 곳 -----
 const places = [
   ['센소지 · 나카미세 거리', '다이토구 아사쿠사', '커다란 붉은 등이 걸린 도쿄에서 가장 오래된 절과 군것질 거리'],
-  ['도쿄 스카이트리', '스미다구 오시아게', '634m 전망대에서 내려다보는 도쿄 전체, 날씨 좋으면 후지산까지'],
+  ['도쿄 스카이트리', '스미다구 오시아게', '높이 634m 타워의 350m·450m 전망대에서 내려다보는 도쿄 전체, 날씨 좋으면 후지산까지'],
   ['우에노 공원', '다이토구 우에노', '약 800그루 벚꽃길, 밤이면 등불이 켜지는 꽃놀이 명소'],
-  ['메이지 신궁', '시부야구 요요기', '도심 한가운데 울창한 숲길을 걷는 조용한 신사'],
-  ['하라주쿠 다케시타 거리', '시부야구 하라주쿠', '알록달록 크레이프와 귀여운 가게가 줄지은 골목'],
-  ['신주쿠 교엔', '신주쿠구', '넓은 잔디밭과 여러 품종 벚꽃, 봄 피크닉에 딱'],
+  // 4번째 값: 사진 자리 색을 직접 지정 (메이지 신궁 카드 삭제 전 색 유지)
+  ['하라주쿠 다케시타 거리', '시부야구 하라주쿠', '알록달록 크레이프와 귀여운 가게가 줄지은 골목', 'var(--pink)'],
+  ['신주쿠 교엔', '신주쿠구', '넓은 잔디밭과 여러 품종 벚꽃, 봄 피크닉에 딱', 'var(--sky)'],
+  ['나카메구로 · 메구로강', '메구로구 나카메구로', '약 800그루 벚꽃이 강 양쪽을 덮는 산책길, 시부야에서 도요코선 2정거장', '#f6dc98'],
   ['시부야 스크램블 교차로', '시부야구 시부야', '한 번에 수천 명이 건너는 그 교차로, 위에서 보면 더 신기해요'],
   ['도쿄타워', '미나토구 시바코엔', '밤에 주황빛으로 빛나는 도쿄의 상징'],
   ['도쿄역 마루노우치', '지요다구 마루노우치', '100년 넘은 붉은 벽돌 역 건물과 역 안 기념품 거리'],
   ['긴자', '주오구 긴자', '반짝이는 백화점 거리, 마지막 날 쇼핑과 디저트'],
 ];
-document.getElementById('placeList').innerHTML = places.map(([name, loc, desc]) => `
+document.getElementById('placeList').innerHTML = places.map(([name, loc, desc, color]) => `
   <article class="place rise">
-    <div class="photo" role="img" aria-label="${name} 사진 자리"><span>사진 들어갈 곳</span></div>
+    <div class="photo" role="img" aria-label="${name} 사진 자리"${color ? ` style="background:${color}"` : ''}><span>사진 들어갈 곳</span></div>
     <div class="info">
       <h3>${name}</h3>
       <p class="loc">${loc}</p>

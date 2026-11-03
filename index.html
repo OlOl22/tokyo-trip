@@ -200,21 +200,7 @@ section { padding-block: 88px 24px; scroll-margin-top: 8px; }
 .route .t { color: var(--sky); font-family: var(--display); margin-right: 4px; }
 
 /* ---------- 가볼 곳 ---------- */
-.places { display: grid; gap: 16px; margin-top: 28px; }
-.place { background: var(--night-2); border-radius: var(--r); overflow: hidden; }
-.photo {
-  aspect-ratio: 16 / 8; display: grid; place-items: center;
-  font-size: .95rem; color: var(--paper-ink);
-}
-.photo span { background: rgba(255,255,255,.6); padding: 4px 12px; border-radius: 99px; }
-.place:nth-child(4n+1) .photo { background: var(--pink); }
-.place:nth-child(4n+2) .photo { background: var(--sky); }
-.place:nth-child(4n+3) .photo { background: var(--lav); }
-.place:nth-child(4n+4) .photo { background: #f6dc98; }
-.place .info { padding: 16px 18px 20px; }
 .tower { margin-top: 28px; scroll-margin-top: 16px; display: grid; gap: 14px; }
-.place .loc { font-size: .88rem; color: var(--sky); }
-.place p { font-size: 1rem; margin-top: 4px; }
 .note { font-size: 13px; color: var(--ink-soft); }
 .decks { display: grid; gap: 10px; margin-bottom: 14px; }
 .decks div { background: var(--night-3); border-radius: 16px; padding: 12px 14px; }
@@ -270,15 +256,11 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
   .days { grid-template-columns: repeat(2, 1fr); }
   .parks { grid-template-columns: 1fr 1fr; }
   .guide { grid-template-columns: 1fr 1fr; }
-  .places { grid-template-columns: repeat(2, 1fr); }
   .tower { grid-template-columns: 1fr 1fr; gap: 0 36px; padding: 28px 32px; }
   .lists { grid-template-columns: repeat(2, 1fr); }
   .stay { grid-template-columns: 1.1fr 1fr; padding: 32px; }
   .tabbar { left: 50%; right: auto; transform: translateX(-50%); bottom: 14px; border-radius: 999px; width: min(560px, 92vw); padding: 6px; }
   body { padding-bottom: 96px; }
-}
-@media (min-width: 1040px) {
-  .places { grid-template-columns: repeat(3, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -396,6 +378,7 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
           <ul>
             <li>오전: 맑으면 스카이트리 전망대부터 (오전이 전망 좋아요, 1~2시간)</li>
             <li>전망대는 온라인으로 미리 예약 (현장 구매는 1장당 500엔 추가). 350m 1,800엔부터 <span class="note">2026년 10월 기준, 날짜별 변동</span></li>
+            <li>소라마치 2층 동구리 공화국에서 지브리 굿즈 구경 (전망대 예약 시간 전후로) <span class="check">영업시간 확인 필요</span> <a class="src" href="https://livejapan.com/ja/in-tokyo/in-pref-tokyo/in-asakusa/article-a0004445/" target="_blank" rel="noopener">출처: LIVE JAPAN</a></li>
             <li>점심: 아래층 소라마치에서 몬자야끼 (<a href="#food">맛집 보기</a>)</li>
             <li>오후: 도부 스카이트리선 1정거장 아사쿠사역 → 센소지와 나카미세 거리</li>
             <li>저녁: 우에노 공원 밤 벚꽃 (3월 말 개화 시기 <span class="check">확인 필요</span>)</li>
@@ -549,7 +532,7 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
   <!-- ========== 가볼 곳 ========== -->
   <section id="places" class="wrap">
     <h2 class="rise">테마파크 다음 3일, 도쿄 산책</h2>
-    <p class="lead rise">4일차부터 갈 곳들이에요. 3월 말이라 벚꽃 명소를 많이 넣었어요.</p>
+    <p class="lead rise">4일차에 들를 스카이트리와 근처 맛집이에요.</p>
 
     <article class="panel tower rise" id="skytree">
       <div>
@@ -580,8 +563,6 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
         </div>
       </div>
     </article>
-
-    <div class="places" id="placeList"></div>
 
     <article class="panel food rise" id="food">
       <h3>스카이트리 · 아사쿠사 맛집</h3>
@@ -660,6 +641,7 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
     <li>출처: 도쿄 디즈니 리조트 공식 사이트 (tokyodisneyresort.jp)</li>
     <li>출처: 도쿄 스카이트리 공식 사이트 (en.tokyo-skytree.jp)</li>
     <li>출처: TDR Explorer, Disney Blog, Japan Travel Kit (2026년 11월 확인)</li>
+    <li>출처: LIVE JAPAN (livejapan.com)</li>
   </ul>
 </footer>
 
@@ -703,30 +685,6 @@ console.assert(daysUntil('2027-03-25', new Date(2027, 2, 25, 23)) === 0, 'daysUn
     ? '출발 ' + m + '월 ' + d + '일'
     : m + '월 ' + d + '일 출발로 가정 · 날짜 미정';
 })();
-
-// ----- 가볼 곳 -----
-const places = [
-  ['센소지 · 나카미세 거리', '다이토구 아사쿠사', '커다란 붉은 등이 걸린 도쿄에서 가장 오래된 절과 군것질 거리'],
-  ['도쿄 스카이트리', '스미다구 오시아게', '높이 634m 타워의 350m·450m 전망대에서 내려다보는 도쿄 전체, 날씨 좋으면 후지산까지'],
-  ['우에노 공원', '다이토구 우에노', '약 800그루 벚꽃길, 밤이면 등불이 켜지는 꽃놀이 명소'],
-  // 4번째 값: 사진 자리 색을 직접 지정 (메이지 신궁 카드 삭제 전 색 유지)
-  ['하라주쿠 다케시타 거리', '시부야구 하라주쿠', '알록달록 크레이프와 귀여운 가게가 줄지은 골목', 'var(--pink)'],
-  ['신주쿠 교엔', '신주쿠구', '넓은 잔디밭과 여러 품종 벚꽃, 봄 피크닉에 딱', 'var(--sky)'],
-  ['나카메구로 · 메구로강', '메구로구 나카메구로', '약 800그루 벚꽃이 강 양쪽을 덮는 산책길, 시부야에서 도요코선 2정거장', '#f6dc98'],
-  ['시부야 스크램블 교차로', '시부야구 시부야', '한 번에 수천 명이 건너는 그 교차로, 위에서 보면 더 신기해요'],
-  ['도쿄타워', '미나토구 시바코엔', '밤에 주황빛으로 빛나는 도쿄의 상징'],
-  ['도쿄역 마루노우치', '지요다구 마루노우치', '100년 넘은 붉은 벽돌 역 건물과 역 안 기념품 거리'],
-  ['긴자', '주오구 긴자', '반짝이는 백화점 거리, 마지막 날 쇼핑과 디저트'],
-];
-document.getElementById('placeList').innerHTML = places.map(([name, loc, desc, color]) => `
-  <article class="place rise">
-    <div class="photo" role="img" aria-label="${name} 사진 자리"${color ? ` style="background:${color}"` : ''}><span>사진 들어갈 곳</span></div>
-    <div class="info">
-      <h3>${name}</h3>
-      <p class="loc">${loc}</p>
-      <p>${desc}</p>
-    </div>
-  </article>`).join('');
 
 // ----- 체크리스트 -----
 const groups = {

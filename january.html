@@ -141,6 +141,26 @@ section { padding-block: 88px 24px; scroll-margin-top: 8px; }
 .tbody li { margin-top: 4px; }
 .tbody li::marker { color: var(--lav); }
 .tag { display: inline-block; font-size: .85rem; padding: 2px 10px; border-radius: 99px; background: var(--night-3); color: var(--ink); margin-top: 10px; }
+.tbody .spots { margin-top: 8px; }
+
+/* ---------- 자세한 일정: 접기 ---------- */
+.details { display: grid; gap: 12px; margin-top: 28px; }
+.panel.day-detail { padding: 0; scroll-margin-top: 16px; }
+.day-detail summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 18px 20px; cursor: pointer; list-style: none;
+  font-family: var(--display); font-size: 1.25rem; line-height: 1.3; word-break: keep-all;
+}
+.day-detail summary::-webkit-details-marker { display: none; }
+.day-detail summary small { display: block; font-family: var(--text); font-size: .85rem; color: var(--ink-soft); }
+.day-detail summary::after {
+  content: "+"; flex: none; width: 32px; height: 32px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--night-3); color: var(--gold); font-size: 1.3rem;
+}
+.day-detail[open] summary::after { content: "−"; }
+.day-detail.magic summary { color: var(--gold); }
+.dbody { padding: 0 20px 20px; }
+.dbody .note { margin-top: 10px; }
 
 .ticket.magic { background: var(--paper); color: var(--paper-ink); }
 .ticket.magic .stub { background: var(--gold); }
@@ -335,15 +355,11 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
       <article class="ticket rise">
         <div class="stub"><b>1</b><span>일차</span></div>
         <div class="tbody">
-          <p class="when">1월 29일(금) · 도착하는 날</p>
+          <p class="when">1월 29일(금)</p>
           <h3>인천 출발, 나리타 도착</h3>
-          <ul>
-            <li>대한항공 인천 14:45 출발 → 나리타 17:20 도착 <span class="check">도착 터미널 확인 필요</span></li>
-            <li>입국 수속 후 1터미널 남쪽 출구 S2로 나와 횡단보도를 건너 16번 승강장으로 이동</li>
-            <li>토요코인 나리타 신관 무료 셔틀 이용. 저녁 시간대는 매시 10분, 30분, 50분, 막차 24:30 <span class="check">셔틀 시간 확인 필요</span></li>
-            <li>공식 시간표에는 터미널 표시가 없고, 시간표는 바뀔 수 있어요</li>
-          </ul>
+          <p class="spots">인천 → 나리타</p>
           <span class="tag">숙소: 토요코인 나리타 신관</span>
+          <a class="tag" href="#day-1">자세히 보기 ↓</a>
         </div>
       </article>
 
@@ -351,8 +367,84 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
         <svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20 0l4 16 16 4-16 4-4 16-4-16L0 20l16-4z"/></svg>
         <div class="stub"><b>2</b><span>일차</span></div>
         <div class="tbody">
-          <p class="when">1월 30일(토) · 하이라이트 첫째 날</p>
+          <p class="when">1월 30일(토)</p>
           <h3>도쿄 디즈니랜드, 그리고 1955 도쿄 베이</h3>
+          <p class="spots">나리타 → 1955 도쿄 베이 · 도쿄 디즈니랜드</p>
+          <span class="tag">숙소: 1955 도쿄 베이</span>
+          <a class="tag" href="#day-2">자세히 보기 ↓</a>
+        </div>
+      </article>
+
+      <article class="ticket magic rise">
+        <svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20 0l4 16 16 4-16 4-4 16-4-16L0 20l16-4z"/></svg>
+        <div class="stub"><b>3</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">1월 31일(일)</p>
+          <h3>도쿄 디즈니씨, 그리고 시내로</h3>
+          <p class="spots">도쿄 디즈니씨 · 스마일 호텔 이동</p>
+          <span class="tag">숙소: 스마일 호텔 도쿄 니혼바시</span>
+          <a class="tag" href="#day-3">자세히 보기 ↓</a>
+        </div>
+      </article>
+
+      <article class="ticket rise">
+        <div class="stub"><b>4</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">2월 1일(월)</p>
+          <h3>쇼핑과 스카이트리</h3>
+          <p class="spots">니혼바시 · 아키하바라 · 긴시초 · 스카이트리</p>
+          <span class="tag">숙소: 스마일 호텔 도쿄 니혼바시</span>
+          <a class="tag" href="#day-4">자세히 보기 ↓</a>
+        </div>
+      </article>
+
+      <article class="ticket rise">
+        <div class="stub"><b>5</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">2월 2일(화)</p>
+          <h3>쇼핑과 겨울 야경</h3>
+          <p class="spots">오모테산도 · 하라주쿠 · 시부야 · 에비스 · 도쿄 야경</p>
+          <span class="tag">숙소: 스마일 호텔 도쿄 니혼바시</span>
+          <a class="tag" href="#day-5">자세히 보기 ↓</a>
+        </div>
+      </article>
+
+      <article class="ticket rise">
+        <div class="stub"><b>6</b><span>일차</span></div>
+        <div class="tbody">
+          <p class="when">2월 3일(수)</p>
+          <h3>니혼바시 산책하고 귀국</h3>
+          <p class="spots">호텔 주변 산책 · 나리타공항 · 인천 도착</p>
+          <span class="tag">숙소 없음 · 귀국</span>
+          <a class="tag" href="#day-6">자세히 보기 ↓</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========== 자세한 일정 ========== -->
+  <section id="detail" class="wrap" data-tab="plan">
+    <h2 class="rise">자세한 일정</h2>
+    <p class="lead rise">시간, 이동, 요금을 일차별로 정리했어요.</p>
+
+    <div class="details">
+      <details class="panel day-detail" id="day-1">
+        <summary><span><small>1일차 · 1월 29일(금) · 도착하는 날</small>인천 출발, 나리타 도착</span></summary>
+        <div class="dbody">
+          <ul>
+            <li>대한항공 인천 14:45 출발 → 나리타 17:20 도착 <span class="check">도착 터미널 확인 필요</span></li>
+            <li>입국 수속 후 1터미널 남쪽 출구 S2로 나와 횡단보도를 건너 16번 승강장으로 이동</li>
+            <li>토요코인 나리타 신관 무료 셔틀 이용. 저녁 시간대는 매시 10분, 30분, 50분, 막차 24:30 <span class="check">셔틀 시간 확인 필요</span></li>
+            <li>공식 시간표에는 터미널 표시가 없고, 시간표는 바뀔 수 있어요</li>
+          </ul>
+          <p class="note">숙소: 토요코인 나리타 신관</p>
+          <p class="note">1일차 이동비: 1인 0엔, 2인 0엔</p>
+        </div>
+      </details>
+
+      <details class="panel day-detail magic" id="day-2">
+        <summary><span><small>2일차 · 1월 30일(토) · 하이라이트 첫째 날</small>도쿄 디즈니랜드, 그리고 1955 도쿄 베이</span></summary>
+        <div class="dbody">
           <ul>
             <li>토요코인 나리타 신관 체크아웃 (10:00까지)</li>
             <li>호텔 10:45 무료 셔틀 → 나리타 1터미널 <span class="check">1월 시간 확인 필요</span></li>
@@ -362,16 +454,14 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
             <li>저녁: 일렉트리컬 퍼레이드와 불꽃놀이</li>
             <li>파크 → 호텔 무료 셔틀 이용</li>
           </ul>
-          <span class="tag">숙소: 1955 도쿄 베이</span>
+          <p class="note">숙소: 1955 도쿄 베이</p>
+          <p class="note">2일차 이동비: 1인 2,900엔, 2인 5,800엔</p>
         </div>
-      </article>
+      </details>
 
-      <article class="ticket magic rise">
-        <svg class="spark" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20 0l4 16 16 4-16 4-4 16-4-16L0 20l16-4z"/></svg>
-        <div class="stub"><b>3</b><span>일차</span></div>
-        <div class="tbody">
-          <p class="when">1월 31일(일) · 하이라이트 둘째 날</p>
-          <h3>도쿄 디즈니씨, 그리고 시내로</h3>
+      <details class="panel day-detail magic" id="day-3">
+        <summary><span><small>3일차 · 1월 31일(일) · 하이라이트 둘째 날</small>도쿄 디즈니씨, 그리고 시내로</span></summary>
+        <div class="dbody">
           <ul>
             <li>1955 도쿄 베이 체크아웃 (11:00까지) 후 호텔 무료 셀프 락커에 짐 보관 (대형 짐 가능, 24시간 이용)</li>
             <li>무료 셔틀로 디즈니씨 이동, 남쪽 메인 입구 이용</li>
@@ -380,15 +470,14 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
             <li>밤: 디즈니씨 관람 후 1955 도쿄 베이로 돌아와 락커에서 짐 찾기 → 22:30쯤 셔틀로 신우라야스역 → 게이요선 핫초보리역 → 히비야선 기타센주 방면 1정거장 → 가야바초역 → 스마일 호텔 <span class="check">1월 셔틀 시간 확인 필요</span></li>
             <li>호텔 도착 약 23:15~23:30</li>
           </ul>
-          <span class="tag">숙소: 스마일 호텔 도쿄 니혼바시</span>
+          <p class="note">숙소: 스마일 호텔 도쿄 니혼바시</p>
+          <p class="note">3일차 이동비: 1인 431엔, 2인 862엔</p>
         </div>
-      </article>
+      </details>
 
-      <article class="ticket rise">
-        <div class="stub"><b>4</b><span>일차</span></div>
-        <div class="tbody">
-          <p class="when">2월 1일(월) · 쇼핑과 스카이트리</p>
-          <h3>니혼바시 · 아키하바라 · 긴시초 · 스카이트리</h3>
+      <details class="panel day-detail" id="day-4">
+        <summary><span><small>4일차 · 2월 1일(월) · 쇼핑과 스카이트리</small>니혼바시 · 아키하바라 · 긴시초 · 스카이트리</span></summary>
+        <div class="dbody">
           <ul>
             <li>10:00 호텔 출발. 가야바초역 → 도자이선 니혼바시역 (1정거장, 약 1분, 178엔)</li>
             <li><b>니혼바시</b>
@@ -423,16 +512,15 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
             </li>
             <li>21:00쯤 호텔 복귀. 오시아게역 → 아사쿠사선 닌교초역 → 히비야선 가야바초역 (약 19분, 1번 환승, 317엔)</li>
           </ul>
-          <p class="note" style="margin-top:10px">4일차 이동비: 1인 1,050엔, 2인 2,100엔</p>
+          <p class="note">숙소: 스마일 호텔 도쿄 니혼바시</p>
+          <p class="note">4일차 이동비: 1인 1,050엔, 2인 2,100엔</p>
           <a class="tag" href="#skytree">전망대 요금과 예약은 가볼 곳에</a>
         </div>
-      </article>
+      </details>
 
-      <article class="ticket rise">
-        <div class="stub"><b>5</b><span>일차</span></div>
-        <div class="tbody">
-          <p class="when">2월 2일(화) · 쇼핑과 겨울 야경</p>
-          <h3>하라주쿠 · 시부야 · 도쿄 야경</h3>
+      <details class="panel day-detail" id="day-5">
+        <summary><span><small>5일차 · 2월 2일(화) · 쇼핑과 겨울 야경</small>하라주쿠 · 시부야 · 도쿄 야경</span></summary>
+        <div class="dbody">
           <ul>
             <li>10:30 호텔 출발. 가야바초역 → 히비야선 히비야역 → 지요다선 오모테산도역 (약 25분, 1번 환승, 209엔)</li>
             <li><b>오모테산도 · 하라주쿠</b>
@@ -473,15 +561,14 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
             </li>
             <li>호텔 복귀. 도쿄역 → 마루노우치선 오테마치역 → 도자이선 가야바초역 (약 11분, 1번 환승, 178엔)</li>
           </ul>
-          <p class="note" style="margin-top:10px">5일차 이동비: 1인 1,076엔, 2인 2,152엔</p>
+          <p class="note">숙소: 스마일 호텔 도쿄 니혼바시</p>
+          <p class="note">5일차 이동비: 1인 1,076엔, 2인 2,152엔</p>
         </div>
-      </article>
+      </details>
 
-      <article class="ticket rise">
-        <div class="stub"><b>6</b><span>일차</span></div>
-        <div class="tbody">
-          <p class="when">2월 3일(수) · 돌아가는 날</p>
-          <h3>니혼바시 산책하고 귀국</h3>
+      <details class="panel day-detail" id="day-6">
+        <summary><span><small>6일차 · 2월 3일(수) · 돌아가는 날</small>니혼바시 산책하고 귀국</span></summary>
+        <div class="dbody">
           <ul>
             <li>체크아웃은 11:00까지</li>
             <li>호텔에 짐 보관 후 주변 산책과 간단한 쇼핑 <span class="check">짐 보관 가능 여부 확인 필요</span></li>
@@ -492,10 +579,10 @@ footer ul { list-style: none; padding: 0; margin-top: 16px; display: grid; gap: 
             <li>나리타공항 1터미널에서 면세 절차와 출국 수속 시작</li>
             <li>대한항공 나리타 1터미널 18:50 출발 → 인천 2터미널 21:35 도착</li>
           </ul>
-          <p class="note" style="margin-top:10px">6일차 이동비: 1인 1,414엔, 2인 2,828엔</p>
+          <p class="note">6일차 이동비: 1인 1,414엔, 2인 2,828엔</p>
           <a class="tag" href="#airport">공항 가는 방법 보기</a>
         </div>
-      </article>
+      </details>
     </div>
 
     <article class="panel rise" style="margin-top:22px">
@@ -1048,11 +1135,22 @@ document.querySelectorAll('.rise').forEach((el, i) => {
   io.observe(el);
 });
 
+// ----- 자세히 보기: 해당 일차를 펼치고 이동 -----
+function openDay(hash) {
+  const d = hash && document.querySelector(hash);
+  if (d && d.tagName === 'DETAILS') d.open = true;
+}
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#day-"]');
+  if (a) openDay(a.hash);
+});
+openDay(location.hash);
+
 // ----- 아래 바 현재 위치 표시 -----
 const tabs = [...document.querySelectorAll('.tabbar a')];
 const spy = new IntersectionObserver(entries => {
   entries.forEach(en => {
-    if (en.isIntersecting) tabs.forEach(t => t.classList.toggle('on', t.hash === '#' + en.target.id));
+    if (en.isIntersecting) tabs.forEach(t => t.classList.toggle('on', t.hash === '#' + (en.target.dataset.tab || en.target.id)));
   });
 }, { rootMargin: '-45% 0px -50% 0px' });
 document.querySelectorAll('main section').forEach(s => spy.observe(s));
